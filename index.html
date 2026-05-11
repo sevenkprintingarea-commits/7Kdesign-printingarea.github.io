@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7K Design & Printing Area</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #00FFFF;
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; scroll-behavior: smooth;
+        }
+
+        body { 
+            background: radial-gradient(circle at center, #101820 0%, #050505 100%);
+            color: #ffffff; line-height: 1.6; overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* --- Navigation --- */
+        .nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 8%; 
+    /* အနက်ရောင်အစား မှန်ကြည်ရောင် (Translucent) ပြောင်းထားပါတယ် */
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(20px); /* နောက်ခံကို ဝါးစေပြီး စာလုံးကို ကြည်စေပါတယ် */
+    -webkit-backdrop-filter: blur(20px);
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* ပါးပါးလေးပဲ border ထည့်ထားပါတယ် */
+}
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 40px; border-radius: 5px; }
+        .logo span { font-size: 1.6rem; font-weight: 800; color: var(--accent); letter-spacing: 2px; }
+        .menu a { color: #fff; text-decoration: none; margin-left: 20px; font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
+        .menu a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero-bg.jpg') no-repeat center center/cover;
+            padding: 100px 20px 0;
+        }
+        .hero-content { max-width: 900px; }
+        .hero-content h2 { 
+            font-size: clamp(2.5rem, 9vw, 5rem); font-weight: 800; text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff 10%, var(--accent) 90%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.3)); margin-bottom: 20px;
+        }
+        .hero-content .eng-motto { font-size: clamp(1rem, 2vw, 1.3rem); color: #eee; letter-spacing: 2px; font-weight: 300; margin-bottom: 10px; }
+        .hero-content .mm-motto { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--accent); font-weight: 400; margin-bottom: 40px; display: block; }
+        .btn-main { padding: 14px 45px; background: var(--accent); color: #000; text-decoration: none; border-radius: 50px; font-weight: 800; text-transform: uppercase; transition: 0.3s; display: inline-block; }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--accent); }
+
+        /* --- SECTION HEADINGS STYLE (အသစ်ပြင်ထားသော အပိုင်း) --- */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
+        }
+
+        /* --- About Section --- */
+        .about { padding: 120px 8% 80px; }
+        .about-content { 
+            max-width: 1100px; margin: 0 auto; background: var(--glass); padding: 60px 40px; border-radius: 40px; border: 1px solid var(--border);
+            transition: 0.5s ease-in-out; cursor: default;
+        }
+        .about-content:hover { 
+            border-color: var(--accent); 
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        .about p { color: #fff; font-size: 1.05rem; text-align: justify; line-height: 2; margin-bottom: 25px; text-shadow: 1px 1px 2px #000; }
+
+        /* --- Services Section --- */
+        .services { padding: 80px 8%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .card { background: var(--glass); border-radius: 30px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--accent); transform: translateY(-15px); box-shadow: 0 0 30px rgba(0, 255, 255, 0.1); }
+        .card-img { width: 100%; height: 260px; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .card-img img { transform: scale(1.1); }
+        
+        .card-info { padding: 35px; text-align: left; flex-grow: 1; }
+        .card-info h3 { color: var(--accent); font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-weight: 600; }
+        .card-info ul { list-style: none; font-size: 0.85rem; color: #ddd; }
+        .card-info ul li { margin-bottom: 8px; display: flex; align-items: flex-start; }
+        .card-info ul li::before { content: "✔"; color: var(--accent); margin-right: 12px; font-weight: bold; }
+
+        .print-sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .print-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 12px; border-left: 2px solid var(--accent); padding-left: 10px; text-transform: uppercase; font-weight: 600; }
+        .custom-note { font-size: 0.75rem; color: var(--accent); font-style: italic; margin-top: 15px; opacity: 0.8; }
+
+        /* --- Contact Section --- */
+        .contact { padding: 120px 8% 150px; background: rgba(0,0,0,0.2); }
+        .contact-container { max-width: 900px; margin: 0 auto; }
+        .contact-subtitle { color: var(--accent); letter-spacing: 5px; font-size: 0.9rem; margin-bottom: 60px; display: block; text-transform: uppercase; }
+
+        .info-pills-container { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 60px; }
+        .info-pill { background: var(--glass); border: 1px solid var(--border); padding: 20px 40px; border-radius: 100px; display: flex; align-items: center; gap: 25px; width: 100%; max-width: 700px; text-align: left; transition: 0.3s; }
+        .info-pill:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 255, 255, 0.05); }
+        .info-pill i { font-size: 1.5rem; color: var(--accent); width: 30px; text-align: center; }
+        .info-pill-text label { display: block; color: #666; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .info-pill-text span { font-size: 1.1rem; color: #fff; }
+
+        .social-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+        .tile { padding: 25px; border-radius: 25px; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #fff; background: var(--glass); border: 1px solid var(--border); transition: 0.4s ease; }
+        .tile i { font-size: 2.2rem; }
+        
+        .tile.fb:hover { background: linear-gradient(135deg, #1877F2, #0056b3); border-color: #1877F2; box-shadow: 0 10px 30px rgba(24,119,242,0.3); transform: translateY(-10px); }
+        .tile.viber:hover { background: linear-gradient(135deg, #7360f2, #5a49d1); border-color: #7360f2; box-shadow: 0 10px 30px rgba(115,96,242,0.3); transform: translateY(-10px); }
+        .tile.tele:hover { background: linear-gradient(135deg, #0088cc, #005580); border-color: #0088cc; box-shadow: 0 10px 30px rgba(0,136,204,0.3); transform: translateY(-10px); }
+
+        footer { padding: 50px; text-align: center; color: #444; font-size: 0.85rem; border-top: 1px solid #111; }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .print-sub-grid { grid-template-columns: 1fr; }
+            .social-tiles { grid-template-columns: 1fr; }
+        }
+/* --- Gallery Section --- */
+.gallery { 
+    padding: 80px 8%; 
+    background: rgba(255, 255, 255, 0.02); 
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.gallery-item {
+    height: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 15px;
+    transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* တစ်ခါတည်း မြင်နေရမယ့် Overlay */
+.gallery-overlay {
+    position: absolute;
+    bottom: 0; /* အောက်ခြေမှာ ကပ်ထားမယ် */
+    left: 0; 
+    width: 100%;
+    height: 25%; /* စာလုံးနောက်ခံ အရိပ်လေး နည်းနည်းပိုချဲ့လိုက်တယ် */
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 40%, transparent 100%);
+    opacity: 1; /* အမြဲတမ်း မြင်နေရအောင် ၁ ပေးထားတယ် */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.gallery-overlay span { 
+    color: var(--accent); 
+    font-size: 0.9rem; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    transform: translateY(0); /* အမြဲတမ်း နေရာမှန်မှာ ရှိနေမယ် */
+    transition: 0.5s ease;
+}
+
+/* Mobile အတွက် Gallery */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .gallery-item {
+        height: 200px;
+    }
+    .gallery-overlay {
+        opacity: 1;
+        bottom: 0;
+    }
+    .gallery-overlay span {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+}
+/* --- Burger Menu Styles --- */
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent);
+            transition: 0.3s;
+        }
+
+        /* --- RESPONSIVE DESIGN (FOR MOBILE & TABLET) --- */
+@media (max-width: 768px) {
+    /* Navigation & Menu */
+    .menu {
+        position: absolute;
+        right: 0;
+        top: 70px;
+        height: 100vh;
+        background: rgba(5, 5, 5, 0.98);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 75%;
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        padding-top: 50px;
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border);
+    }
+
+    .menu a {
+        margin: 15px 0;
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .burger {
+        display: flex; /* Burger ခလုတ်ကို Mobile မှာပဲ ပြမယ် */
+    }
+
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 100px 15px 40px;
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .hero-content h2 {
+        font-size: 2.4rem; /* စာလုံးအရွယ်အစား လျှော့လိုက်တယ် */
+        line-height: 1.2;
+    }
+
+    /* About Section */
+    .about {
+        padding: 60px 5% 40px;
+    }
+
+    .about-content {
+        padding: 30px 20px;
+        border-radius: 25px;
+    }
+
+    .about p {
+        font-size: 0.95rem;
+        text-align: left; /* ဖုန်းမှာဆို ဘယ်ကပ်ဖတ်ရတာ ပိုလွယ်တယ် */
+    }
+
+    /* Services Grid */
+    .services {
+        padding: 40px 5%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr; /* Card တစ်ခုချင်းစီ အရှည်လိုက်ပြမယ် */
+        gap: 25px;
+    }
+
+    .card-img {
+        height: 200px;
+    }
+
+    .print-sub-grid {
+        grid-template-columns: 1fr; /* Digital နဲ့ Offset ကို တစ်တန်းစီပြမယ် */
+    }
+
+    /* Gallery Grid */
+    .gallery {
+        padding: 40px 5%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* တစ်တန်းကို ၂ ပုံစီပြမယ် */
+        gap: 12px;
+    }
+
+    .gallery-item {
+        height: 160px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    /* Contact & Social Tiles */
+    .contact {
+        padding: 60px 5% 80px;
+    }
+
+    .info-pill {
+        padding: 15px;
+        gap: 15px;
+        border-radius: 20px;
+    }
+
+    .info-pill-text span {
+        font-size: 0.9rem;
+        word-break: break-all; /* စာသားရှည်ရင် ဖုန်း screen ထဲက မထွက်သွားအောင် */
+    }
+
+    .social-tiles {
+        grid-template-columns: 1fr; /* Facebook, Viber, Telegram တစ်ခုချင်းစီစီမယ် */
+        gap: 15px;
+    }
+
+    .tile {
+        padding: 20px;
+    }
+
+    /* Burger Animation (X ပုံစံပြောင်းတာ) */
+    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .toggle .line2 { opacity: 0; }
+    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+}
+    </style>
+</head>
+<body>
+
+<header class="nav">
+        <div class="logo"><img src="img/logo.jpg" alt="7K Logo"><span>7K</span></div>
+        <nav class="menu">
+            <a href="#">HOME</a>
+            <a href="#services">SERVICES</a>
+            <a href="#gallery">PORTFOLIO</a>
+            <a href="#about">ABOUT</a> 
+            <a href="#contact">CONTACT</a>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>BEYOND THE PRINT</h2>
+            <p class="eng-motto">Best Service Best Quality For Your Business</p>
+            <p class="mm-motto">လုပ်ငန်းရှင်တိုင်းအဆင်ပြေဖို့ အဖြေ 7K</p>
+            <a href="#services" class="btn-main">See Our Best Services</a>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-img"><img src="img/design.jpg" alt="Design"></div>
+                <div class="card-info">
+                    <h3>Design Service</h3>
+                    <ul><li>Logo Design</li>
+                        <li>Social Media Design</li>
+                        <li>Printing Design</li>
+                        <li>Packaging Design</li>
+                        <li>Poster Design</li></ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="img/printing.jpg" alt="Print"></div>
+                <div class="card-info">
+                    <h3>Print Service</h3>
+                    <div class="print-sub-grid">
+                        <div class="print-col">
+                            <h4>Digital</h4>
+                            <ul>
+                                <li>Vinyl (inkjet + UV)</li>
+                                <li>Die cut Sticker</li>
+                                <li>Clear Sticker</li>
+                                <li>Hologram Sticker</li>
+                                <li>PP Board + Sticker</li>
+                                <li>All in One + Sticker</li>
+                                <li>ID Card (Inkjet + UV)</li>
+                            </ul>
+                        </div>
+                        <div class="print-col">
+                            <h4>Offset</h4>
+                            <ul>
+                                <li>Business Card</li>
+                                <li>Letterhead</li>
+                                <li>Pamphlet</li>
+                                <li>Invitation Card</li>
+                                <li>Voucher / Paper Box</li>
+                                <li>Profile / Clinic Book</li>
+                                <li>Wall & Table Calendar</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="custom-note">Customize လုပ်ချင်တဲ့ Paper များလဲ ရိုက်နှိပ်နိုင်ပါသည်။</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="img/screen.jpg" alt="Screen"></div>
+                <div class="card-info">
+                    <h3>Screen Printing</h3>
+                    <ul>
+                        <li>T-Shirt (Screen + DTF Sticker)</li>
+                        <li>Recycle Bag အမျိုးမျိုး</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="img/sublimation.jpg" alt="Sublimation"></div>
+                <div class="card-info">
+                    <h3>Sublimation</h3>
+                    <ul>
+                        <li>Lanyard & Wristband</li>
+                        <li>Totebag / Mug အမျိုးမျိုး</li>
+                        <li>Sport Bottle</li>
+                        <li>Umbrella</li>
+                        <li>ကြွေပြား Sublimation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="img/ads.jpg" alt="Ads"></div>
+                <div class="card-info">
+                    <h3>Advertising Material</h3>
+                    <ul>
+                        <li>X stand / Window Stand</li>
+                        <li>Speel Wheel</li>
+                        <li>Roll up Banner</li>
+                        <li>Customize Box</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- GALLERY SECTION -->
+
+<section id="gallery" class="gallery">
+        <h2 class="section-title">Our Creations</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="img/Logo1.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Logo</span></div>
+            </div>
+           
+            <div class="gallery-item">
+                <img src="img/Cupon.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Cupon</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/ID.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>ID Card & Lanyard</span></div>
+            </div>
+             <div class="gallery-item">
+                <img src="img/Businesscard.jpg" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Business Card</span></div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="img/ProfileBook.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Profile Book</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/Pamphlte.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Pamphlet</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/QR.jpg" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>QR Stand</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/Newspaper.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Newspaper</span></div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="img/Letterhead.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Letterhead</span></div>
+            </div>
+              <div class="gallery-item">
+                <img src="img/NoteBook.jpg" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Note Book</span></div>
+            </div>
+                     
+            <div class="gallery-item">
+                <img src="img/Menu_2.jpg" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Menu</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/sportbottle.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>sportbottle</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/CarbonlessVoucher.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Carbonless Voucher</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/advertising.jpg" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Advertising Material</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="img/Vinyl&XStand.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Vinyl & X Stand</span></div>
+            </div>
+          <div class="gallery-item">
+                <img src="img/DieCut.png" alt="7K Portfolio">
+                <div class="gallery-overlay"><span>Die Cut Sticker</span></div>
+            </div>
+        </div>
+    </section>
+
+      <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title">About Us</h2>
+            <p>
+                7K Design & Printing Area ကို ၂၀၂၃ ခုနှစ်၊ ဇူလိုင်လ (၇) ရက်နေ့တွင် ရန်ကုန်မြို့၊ အလုံမြို့နယ်၌ ခေတ်မီပုံနှိပ်လုပ်ငန်း၏ စံချိန်စံညွှန်းအသစ်များ ဖန်တီးနိုင်ရန် ရည်ရွယ်၍ စတင်တည်ထောင်ခဲ့ပါသည်။ ကျွန်ုပ်တို့သည် “Best Service, Best Quality” ဟူသော ဆောင်ပုဒ်ကို အလေးထားပြီး Customer များ၏ အတွေးအမြင်နှင့် စိတ်ကူးစိတ်သန်းများကို အရည်အသွေးမြင့်မားပြီး အလှပဆုံးသော ဒီဇိုင်းများအဖြစ် လက်တွေ့ဖော်ဆောင်ပေးနေသည့် ယုံကြည်အားထားရသော ပုံနှိပ်လုပ်ငန်းတစ်ခု ဖြစ်ပါသည်။ အရည်အသွေးကို အဓိကထား၍ တိကျမြန်ဆန်သော ဝန်ဆောင်မှုများဖြင့် လူကြီးမင်းတို့၏ လုပ်ငန်းများ ပိုမိုတိုးတက်အောင်မြင်ပြီး တောက်ပလာစေရန် အစဉ်မပြတ် အလေးထား ဆောင်ရွက်ပေးလျက်ရှိပါသည်။
+            </p>
+            <p>
+                7K Design & Printing Area was established on July 7, 2023, in Ahlone Township, Yangon, with the aim of creating new standards in modern printing services. We proudly uphold our motto, “Best Service, Best Quality,” and are a trusted printing business dedicated to transforming our customers’ ideas and creativity into high-quality and visually outstanding designs. With a strong focus on quality and efficient service, we continuously strive to support the growth and success of your business, helping it shine and stand out.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <span class="contact-subtitle">Get in touch with us</span>
+            <h2 class="section-title" style="margin-bottom: 15px;">Let's build your brand</h2>
+            <div class="info-pills-container">
+                <div class="info-pill"><i class="fas fa-map-marker-alt"></i><div class="info-pill-text"><label>Find Us</label><span>No(123), Nguwah Street, Ahlone, Yangon.</span></div></div>
+                <div class="info-pill"><i class="fas fa-phone-alt"></i><div class="info-pill-text"><label>Call Us</label><span>09-444 990 750</span></div></div>
+                <div class="info-pill"><i class="fas fa-envelope"></i><div class="info-pill-text"><label>Email Us</label><span>sevenkprintingarea@gmail.com</span></div></div>
+            </div>
+             </div>
+        <div class="social-tiles">
+    <a href="https://www.facebook.com/share/1BCr2s2TCt/" target="_blank" class="tile fb">
+        <i class="fa-brands fa-facebook-f"></i> Facebook
+    </a>
+    <a href="viber://contact?number=%2B959444990750" class="tile viber">
+        <i class="fa-brands fa-viber"></i> Viber
+    </a>
+    <a href="https://t.me/+959444990750" target="_blank" class="tile tele">
+        <i class="fa-brands fa-telegram"></i> Telegram
+    </a>
+</div>
+        </div>
+    </section>
+
+    <footer>
+    © 2026 7K DESIGN & PRINTING AREA. <br>
+    Developed by DATA</span>. 
+    ALL RIGHTS RESERVED.
+</footer>
+<script>
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.menu');
+        const navLinks = document.querySelectorAll('.menu a');
+
+        burger.addEventListener('click', () => {
+            // Menu ဖွင့်/ပိတ်
+            nav.classList.toggle('nav-active');
+            
+            // Burger Animation
+            burger.classList.toggle('toggle');
+        });
+
+        // Menu link တစ်ခုခုကို နှိပ်လိုက်ရင် menu ပြန်ပိတ်သွားအောင်
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        });
+    </script>
+
+</body>
+</html>
