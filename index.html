@@ -120,11 +120,16 @@
     width: auto; 
     height: auto; 
     object-fit: contain; /* ဒါက ပုံကို မဖြတ်ဘဲ မူရင်းအတိုင်း ကွက်တိဝင်စေပါတယ် */
-    transition: 0.5s ease;
+    transition: transform 0.5s ease; /* ပုံကြီးလာတဲ့ effect အတွက် */
+    
+    /* ပုံကြည်လင်စေရန် add လုပ်ပါသည် */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: scale(1); /* မူရင်း scale */
 }
 
 .gallery-item:hover img { 
-    transform: scale(1.2); 
+    transform: scale(1.1); /* Mouse တင်ရင် ပုံနည်းနည်းကြီးလာစေရန် (1.2 ကနေ 1.1 သို့ လျှော့ထားပါတယ်) */
 }
 
 .gallery-overlay { 
@@ -132,23 +137,28 @@
     bottom: 0; 
     width: 100%; 
     padding: 15px; 
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.7); /* စာသားနောက်ခံကို အမည်းရောင် ပွင့်လင်းမြင်သာ 70% ပေးထားခြင်း */
     text-align: center;
-    opacity: 0; /* Hover လုပ်မှ စာပေါ်လာစေချင်ရင် သုံးနိုင်ပါတယ် */
+    
+    /* စာမျက်နှာပွင့်ကတည်းက တစ်ခါတည်း အမြဲတမ်း ပေါ်နေစေရန် */
+    opacity: 1; 
+    visibility: visible;
     transition: 0.3s;
+    z-index: 1; /* ပုံကြီးလာရင် စာကို မကွယ်စေရန် add လုပ်ပါသည် */
 }
 
-.gallery-item:hover .gallery-overlay {
+/* Mouse တင်မှ စာသားပေါ်လာမည့် Hover အပိုင်းကို ဖျက်ထုတ်ထားပါသည် (အသေပေါ်နေမည်) */
+/* .gallery-item:hover .gallery-overlay {
     opacity: 1;
-}
+} */
 
 .gallery-overlay span { 
     color: var(--accent); 
     font-weight: 700; 
     text-transform: uppercase; 
     font-size: 0.8rem; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* စာသားပိုထင်ရှားစေရန် */
 }
-
 /* Mobile Setup */
 @media (max-width: 768px) {
     .gallery-grid {
